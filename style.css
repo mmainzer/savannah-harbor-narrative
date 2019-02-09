@@ -1,0 +1,195 @@
+body {
+  background-color: #f4f8fb;
+}
+
+.bd-navbar {
+  background-color: #70A9A1;
+  background-image: none;
+  background-repeat: no-repeat;
+}
+
+#title {
+	margin: 0 auto;
+	padding-top: 5rem;
+	text-align: center;
+	font-size: 100px;
+	color: #403a30;
+	line-height: 1;
+}
+
+.subtitle {
+	margin: 0 auto;
+	padding-top: 1.5rem;
+	padding-bottom: 1.5rem;
+	text-align: center;
+	color: #979698;
+	font-weight: 600;
+	font-size: 17px;
+	line-height: 1.7;
+
+}
+
+#byline {
+	margin: 0 auto;
+	padding-top: 0.25rem;
+	padding-bottom: 1.5rem;
+	text-align: left;
+	font-size: 14px;
+}
+
+.scrolly-bars {
+	margin: 3rem auto;
+	background-color: #f4f4f4;
+	padding: 1rem;
+
+}
+
+.filler {
+	height: 20rem;
+	text-align: center;
+}
+
+#scrolly-overlay .scrolly-bars article {
+	padding: 0;
+	max-width: 30rem;
+	margin: 0 auto;
+	position: relative;
+}
+
+#scrolly-overlay .scrolly-bars article .step {
+  min-height: 67vh;
+  margin-bottom: 1rem;
+}
+
+#scrolly-overlay .scrolly-bars article .step:last-of-type {
+  margin-bottom: 0;
+}
+
+#scrolly-overlay .scrolly-bars article .step.is-active p {
+  background-color: #008080;
+}
+
+#scrolly-overlay .scrolly-bars article .step p {
+  margin: 0;
+  padding: 1rem;
+  text-align: center;
+  font-weight: 400;
+  background-color: #5b5b5b;
+  transition: background-color 250ms ease-in-out;
+  color: #f4f4f4;
+}
+
+#scrolly-overlay .scrolly-bars figure.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  width: 100%;
+  height: 50vh;
+  background: #969696;
+  margin: 0;
+  top: 25vh;
+  left: 0;
+}
+
+#scrolly-overlay .scrolly-bars figure.sticky .bar-outer {
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  width: 90%;
+  height: 4rem;
+  background-color: #fff;
+}
+
+#scrolly-overlay .scrolly-bars figure.sticky .bar-inner {
+  width: 10%;
+  height: 100%;
+  transition: width 1s ease-in-out;
+  background-color: #daa520;
+}
+
+#container-wide {
+  max-width: 90%;
+
+}
+
+.map-scroll {
+  /*border: solid purple;*/
+  padding-top: 1.5rem;
+}
+
+.map-step {
+  padding-top: 0.25rem;
+  padding-bottom: 5rem;
+}
+
+.map-step:last-of-type {
+  padding-bottom: 20rem;
+}
+
+#map {
+  /*border: solid red;*/
+  padding-top: 1.5rem;
+  position: -webkit-sticky;
+  position: sticky;
+  width: 100%;
+  height: 18.5%;
+  margin: 0;
+  top: 1.5rem;
+  left: 0;
+}
+
+.mapboxgl-canvas {
+  left: 0;
+}
+
+.filler {
+  height: 20rem;
+  text-align: center;
+}
+
+#clock {
+    position: absolute;
+    right: 1em;
+    top: 2em;
+    width: 75px;
+    height: 75px;
+    z-index: 1;
+}
+
+#legend {
+    position: fixed;
+    right: 0em;
+    bottom: 1.5em;
+    width: 15em;
+    background-color: rgba(0,0,0,0.3);
+    padding: 1em;
+    color: white;
+}
+#legend .label {
+    font-size: 0.75em;
+}
+#legend #shipLegend {
+    margin-top: -1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 1em;
+}
+
+#legend .ship {
+    text-align: center;
+    font-size: 0.5em;
+}
+#legend .ship svg {
+    /*display: block;*/
+    zoom: 0.5;
+}
+
+.mapboxgl-missing-css{
+  display: none !important;
+}
+
+.after-map {
+  padding-top: 2rem;
+}
