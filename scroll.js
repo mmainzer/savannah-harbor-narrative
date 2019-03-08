@@ -1,34 +1,306 @@
 					// SCROLL OVERLAY MECHANISM FOR BAR CHARTS
 
+// config
+    var width = 880,
+        height = 480,
+        padding = 20,
+        containerBuckets = 5000,
+        colCount = 0,
+        rowCount = 0,
+        colLimit = 10,
+        xPos = 10,
+        yPos = height - 30,
+        radius = 2.2,
+        spacing = 1.6,
+        startXpos = xPos,
+        labelXpos = startXpos,
+        labels,
+        slideOffset = window.innerHeight / 3,
+        transition = 500,
+        percentLines = [],
+        pLinesExist = false,
+        gradeOneMarkers = [],
+        gradeTwelveMarkers = [],
+        gradeThirteenMarkers = [],
+        gradeFourteenMarkers = [],
+        slideNineRun = false,
+        ignoreTrigger = true,
+        debug = false,
+        circlesAdded = false,
+        circlesReady = false,
+        mobile = false,
+        scrollDebug = true,
+        oneHundred,
+        employed;
+
 const container = d3.select('#scrolly-overlay');
 const stepSel = container.selectAll('.step');
+const scroller = scrollama();
 
-function updateChart(index) {
-	const sel = container.select(`[data-index='${index}']`);
-	const width = sel.attr('data-width');
-	stepSel.classed('is-active', (d, i) => i === index);
-	container.select('.bar-inner').style('width', width);
-}
+var svg = d3.select('#scrolly-overlay')
+    .append("svg")
+    .attr("width", width + padding * 2)
+    .attr("height", height + padding * 2)
+    .append("g")
+    .attr("transform", "translate(" + padding + " , " + padding + ")"),
+    pos = $("svg").position();
 
-function init() {
-Stickyfill.add(d3.select('.sticky').node());
+    function randomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
 
-	enterView({
-		selector: stepSel.nodes(),
-		offset: 0.5,
-		enter: el => {
-			const index = +d3.select(el).attr('data-index');
-			updateChart(index);
-		},
-		exit: el => {
-			let index = +d3.select(el).attr('data-index');
-			index = Math.max(0, index - 1);
-			updateChart(index);
-		}
-	});
-}
+    function addCircles(gradeCount, className) {
+        var c;
+        var bar = svg.append("g")
+            .attr("class", className + "group");
 
-init();
+        for (c = 0; c < gradeCount; c++) {
+
+            bar.append("circle")
+                .attr("cx", 50)
+                .attr("cy", yPos)
+                .attr("r", 3)
+                .attr("class", className)
+                .style("opacity", 0)
+
+        }
+
+    }
+
+    function spreadCircles() {
+        var xx = 200,
+            yy = height / 4 * 3,
+            colc = 0;
+
+        // var testData = d3.range(0, 100);
+
+        var dWidth = 50 * 6 + (49 * spacing);
+
+        if (mobile) {
+            var origX = xx = (width - dWidth) / 3;
+        } else {
+            var origX = xx = (width - dWidth) / 2;
+        }
+
+        d3.selectAll(".grade1")
+            .each(function (d, i) {
+                d3.select(this)
+                    .attr("cx", xx)
+                    .attr("cy", yy)
+                    .transition()
+                    .delay(function () {
+                        return randomInt(50, 500);
+                    })
+                    .style("opacity", 1)
+
+                colc > 50 ? (xx = origX, yy += 9, colc = 0) : (xx += 8.7, colc++);
+
+            })
+
+    }
+
+    function spreadCirclesReverse() {
+
+        var xx = 200,
+            yy = height / 4 * 3,
+            colc = 0;
+
+        d3.selectAll(".grade1")
+            .each(function (d, i) {
+                d3.select(this).transition()
+                    .delay(function () {
+                        return randomInt(5, 500);
+                    })
+                    .duration(transition)
+                    .attr("cx", xx).attr("cy", yy).attr("r", 3).style("fill", "#fffcbc").style("opacity", 1)
+
+                colc > 50 ? (xx = 200, yy += 9, colc = 0) : (xx += 8.7, colc++);
+
+            })
+
+    }
+
+    function makeBars(groupName, className, barNo, pupilCount, year, labelClass, start, label, ref) {
+
+        !start ? (xPos = startXpos = startXpos + (radius * 2 + spacing) * (colLimit + 2), yPos = height - 30) : (xPos = 0, yPos = height - 30);
+
+        if (startPositions[1] && groupName == "bar2") {
+            xPos = startPositions[1];
+        }
+
+        startPositions.push(xPos);
+
+        startXpos = xPos, colCount = 0;
+
+        var bar = svg.select(className + "group");
+
+        // barlabels
+        bar.append("text")
+            .attr("x", startXpos + ((radius * 2 + spacing) * colLimit) / 2)
+            .attr("y", height - 5)
+            .html(year)
+            .attr("class", "barLabels")
+            .style("text-anchor", "middle")
+            .style("opacity", 0)
+            .transition()
+            .delay(1000)
+            .style("opacity", function () {
+                if (groupName === "bar13" || groupName === "bar14") {
+                    return 0;
+                } else {
+                    return 1;
+                }
+            })
+
+        // bar circles
+        d3.selectAll(className)
+            .each(function (d, i) {
+                d3.select(this)
+                    .transition()
+                    .delay(function () {
+                        return randomInt(5, 500);
+                    })
+                    .duration(transition * 3)
+                    .attr("cx", xPos)
+                    .attr("cy", yPos)
+                    .attr("r", radius)
+                    .style("fill", function () {
+                        if (className === ".grade13") {
+                            return "white";
+                        } else if (className === ".grade14") {
+                            return "lightgreen";
+                        }
+                        // else { return col; }
+                    })
+                    .style("opacity", function () {
+                        if (groupName === "bar13" || groupName === "bar14") {
+                            return 0;
+                        } else {
+                            return 1;
+                        }
+                    })
+                    .style("stroke", "none")
+
+                xPos = xPos + spacing + radius * 2;
+                colCount++;
+
+                if (colCount === colLimit) {
+                    colCount = 0;
+                    xPos = startXpos;
+                    yPos = yPos - spacing - radius * 2;
+                }
+            })
+
+        //    barNumbers
+        bar.append("text")
+            .attr("x", startXpos + ((radius * 2 + spacing) * colLimit) / 2)
+            .attr("y", function () {
+                if (ref) return yPos - 10 + 65;
+                else return yPos - 10;
+            })
+            .html(pupilCount)
+            .attr("class", "barNumbers")
+            .classed(barNo, true)
+            .style("text-anchor", "middle")
+            .style("opacity", 0)
+            .transition()
+            .delay(1000)
+            .duration(transition)
+            .style("opacity", function () {
+                if (groupName === "bar13" || groupName === "bar14") {
+                    return 0;
+                } else {
+                    return 1;
+                }
+            })
+
+    }
+
+    function moveBarNumber(barNo, xDiff) {
+
+        d3.select(barNo)
+            .transition()
+            .duration(transition)
+            .attr("x", function () {
+                var cX = d3.select(this).attr("x");
+                return cX - xDiff;
+
+            })
+            .style("opacity", 1)
+
+    }
+
+    $("document").ready(function () {
+        // slide setup
+        var slideWidth = $("#slides").width();
+        var chartWidth = $("#chart").width();
+
+        $(".slide").height(window.innerHeight);
+        $("#slides").css("left", window.innerWidth / 2 - slideWidth / 2 + "px");
+        $("#chart").css("left", (window.innerWidth / 2 - (chartWidth / 2)) + "px");
+        $("#slides").css("opacity", 1);
+        $("#chart").css("opacity", 1);
+
+    });
+
+    function scrollInit() {
+
+        scroller
+            .setup({
+                step: '.step',
+                offset: 0.7,
+                debug: false
+                // progress: true
+            })
+            .onStepEnter(handleStepEnter)
+
+    }
+
+    d3.csv("teu-summary.csv", function (data) {
+        data.forEach(function (d) {
+            d.teus = +d.teus / containerBuckets;
+        })
+
+        addCircles(data[0].teus, "grade1");
+        addCircles(data[0].teus, "grade1ref");
+
+        for (var c = 1; c < 14; c++) {
+            var i = c + 1;
+
+            addCircles(data[c].teus, "grade" + i, "#045a8d")
+
+        }
+
+        var count = d3.selectAll(".grade2").size();
+
+    })
+
+// function updateChart(index) {
+// 	const sel = container.select(`[data-index='${index}']`);
+// 	const width = sel.attr('data-width');
+// 	stepSel.classed('is-active', (d, i) => i === index);
+// 	container.select('.bar-inner').style('width', width);
+// }
+
+// function init() {
+// Stickyfill.add(d3.select('.sticky').node());
+
+// 	enterView({
+// 		selector: stepSel.nodes(),
+// 		offset: 0.5,
+// 		enter: el => {
+// 			const index = +d3.select(el).attr('data-index');
+// 			updateChart(index);
+// 		},
+// 		exit: el => {
+// 			let index = +d3.select(el).attr('data-index');
+// 			index = Math.max(0, index - 1);
+// 			updateChart(index);
+// 		}
+// 	});
+// }
+
+// init();
 
 
 					// INITIATE MAP AND NECESSARY LAYERS

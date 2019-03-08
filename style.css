@@ -83,14 +83,15 @@ body {
   position: -webkit-sticky;
   position: sticky;
   width: 100%;
-  height: 50vh;
-  background: #969696;
+  height: 70vh;
+  background: #f4f4f4;
+  /*opacity: 1;*/
   margin: 0;
-  top: 25vh;
+  top: 15vh;
   left: 0;
 }
 
-#scrolly-overlay .scrolly-bars figure.sticky .bar-outer {
+/*#scrolly-overlay .scrolly-bars figure.sticky .bar-outer {
   position: absolute;
   top: 50%;
   left: 5%;
@@ -106,7 +107,7 @@ body {
   height: 100%;
   transition: width 1s ease-in-out;
   background-color: #daa520;
-}
+}*/
 
 #container-wide {
   max-width: 90%;
