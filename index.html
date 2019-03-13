@@ -24,7 +24,7 @@
   </head>
   <body>
 
-    <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar fixed-top">
+    <!-- <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar fixed-top">
       <a class="navbar-brand" href="https://mmainzer.github.io/">MMainza</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -42,7 +42,7 @@
           </li>
         </ul>
       </div>
-    </header>
+    </header> -->
 
               <!-- CONTAINER FOR CONTENT -->
 
@@ -70,43 +70,41 @@
 
               <!-- FIRST ANIMATED SCROLLY SECTION FOR TEU DATA -->
 
-      <section class="scrolly-animation">
-        
-        <div id="scrolly-overlay" class="row row-centered">
-          <div class="col-sm-12 col-centered scrolly-bars">
-            
-            <!--  sticky graphic   -->
-            <figure class='sticky'>
-              <!-- <div class='bar-outer'>
-                <div class='bar-inner'></div>
-              </div> -->
-            </figure>
-          
-            <!--  step text   -->
-            <article>
-              <div class='step' data-width='10%' data-step='slide1'>
-                  <p>Marine shipping is typically measured in Twenty foot Equivalent Units, or TEUs. This is your standard shipping container. Each block represents 100,000 of those shipping containers.</p>
+      <div class="row row-centered">
+        <div class="col-sm-12 col-centered">
+          <div id='scroll'>
+            <!--  graphic container  -->
+            <div class='scroll__graphic'>
+              <!--   actual graphic/chart   -->
+              <div id='chart'>
+                
               </div>
-              <div class='step' data-width='90%' data-step='slide2'>
-                 <p>In 2003, the Port of Savannah processed n million TEUs for either import or export.</p>
+            </div>
+
+            <!--  step/text container  -->
+            <article class='scroll__text'>
+              <div class='step' data-step='2'>
+                <p>Imagine that each of the circles below represent <span class="em">7,000 shipping containers</span>. The Port of Savannah has to process, inspect, and move thousands of these every day.</p>
               </div>
-              <div class='step' data-width='50%' data-step='slide3'>
-                <p>The port steadily increased its capacity until 2008, with the global financial collapse.</p>
+              <div class='step' data-step='3'>
+                <p>The Port's capacity has steadily expanded over the past decade. In 2006, the Port was processing a little over <span class="em">2 million individual containers</span>.</p>
               </div>
-              <div class='step' data-width='50%' data-step='slide4'>
-                <p>Despite the misstep, the Port has increasing its capacity ever since, with n million TEUs processed in 2018, a new record.</p>
+              <div class='step' data-step='4'>
+                <p>Activity stalled during the recession's first year, but by 2012, the Port had processed nearly <span class="em">3 million TEUs</span> in that year.</p>
               </div>
-              <div class='step' data-width='50%' data-step='slide5'>
-                <p>Since 2003, that's a n% increase in TEUs processed.</p>
+              <div class='step' data-step='5'>
+                <p>Activity has picked up more rapidly at the Port since the recession. In 2018, a new record was hit, with <span class="em">over 4.3 million TEUs</span> coming through the port.</p>
               </div>
-              <div class='step' data-width='10%' data-step='slide6'>
-                <p>With such a massive amount of material being handled successfully, 2019 is projected for even more activity brought through Savannah.</p>
+              <div class='step' data-step='6'>
+                <p>With a strong economy expected to continue, the Port is projected to handle <span class="em">over 5 million TEUs in 2019</span>.</p>
               </div>
             </article>
-
           </div>
         </div>
-      </section>
+
+      </div>
+
+
 
             <!-- SECTION OF TEXT INTRO INTERNATIONAL REACH -->
 
@@ -116,65 +114,81 @@
           <p>Bacon ipsum dolor amet drumstick boudin ham hock frankfurter, turkey picanha pork loin kielbasa andouille corned beef tri-tip capicola spare ribs short loin. Tail pancetta sirloin, picanha fatback shoulder pastrami t-bone ham bresaola. Pig tenderloin sirloin, porchetta meatball boudin chicken leberkas. Kevin meatloaf turducken fatback sirloin, t-bone shoulder pig swine jerky ribeye ball tip brisket. Ball tip pork loin short ribs sausage tenderloin.</p>
         </div>
       </div>
+    </div>
 
-              <!-- SECOND SCROLLY ANIMATION WITH MAP OF INTERNATIONAL PORTS -->
+    <div id="container-wide" class="container">
 
-      <!-- <section class="scrolly-animation">
-        
-        <div id="scrolly-overlay" class="row row-centered">
-          <div class="col-sm-12 col-centered scrolly-bars">
-            
-            
-            <figure class='sticky'>
-              <div class='bar-outer'>
-                <div class='bar-inner'></div>
-              </div>
-            </figure>
+      <section class="scrolly-animation">
+
+        <div id="scrolly-center" class="row row-centered">
           
-            
-            <article>
-              <div class='step' data-width='10%' data-index='0'>
-                  <p>Marine shipping is typically measured in Twenty foot Equivalent Units, or TEUs. This is your standard shipping container. Each block represents 100,000 of those shipping containers.</p>
-              </div>
-              <div class='step' data-width='90%' data-index='1'>
-                 <p>In 2003, the Port of Savannah processed n million TEUs for either import or export.</p>
-              </div>
-              <div class='step' data-width='50%' data-index='2'>
-                <p>The port steadily increased its capacity until 2008, with the global financial collapse.</p>
-              </div>
-              <div class='step' data-width='50%' data-index='3'>
-                <p>Despite the misstep, the Port has increasing its capacity ever since, with n million TEUs processed in 2018, a new record.</p>
-              </div>
-              <div class='step' data-width='50%' data-index='4'>
-                <p>Since 2003, that's a n% increase in TEUs processed.</p>
-              </div>
-              <div class='step' data-width='10%' data-index='5'>
-                <p>With such a massive amount of material being handled successfully, 2019 is projected for even more activity brought through Savannah.</p>
-              </div>
-            </article>
+          <!-- column for fixed map container -->
+          <div class="col-sm-12 map2-col">
+            <!-- place container for map here -->
+            <div id="map2" class="map sticky"></div>
 
           </div>
+
+          <!-- column for text in scroller -->
+          <div id="map2-scroll-narrative" class="col map2-scroll">
+            <!-- write steps for map animation here -->
+            <div id="map2-step-one" class="map2-step">
+              <p>Step text here</p>
+            </div>
+
+            <div id="map2-step-two" class="map2-step">
+              <p>Step text here</p>
+            </div>
+
+            <div id="map2-step-three" class="map2-step">
+              <p>Step text here</p>
+            </div>
+
+            <div id="map2-step-four" class="map2-step">
+              <p>Step text here</p>
+            </div>
+
+            <div id="map2-step-five" class="map2-step">
+              <p>Step text here</p>
+            </div>
+
+            <div id="map2-step-six" class="map2-step">
+              <p>Step text here</p>
+            </div>
+
+            <div id="map2-step-seven" class="map2-step">
+              <p>Step text here</p>
+            </div>
+
+          </div>
+
         </div>
 
-      </section> -->
+      </section>
+
+    </div>
 
 
               <!-- SECTION OF TEXT -->
 
-      <div class="row row-centered">
-        <div class="col-md-3"></div>
-        <div class="col-lg-6 col-centered prose">
-          <p>Bacon ipsum dolor amet drumstick boudin ham hock frankfurter, turkey picanha pork loin kielbasa andouille corned beef tri-tip capicola spare ribs short loin. Tail pancetta sirloin, picanha fatback shoulder pastrami t-bone ham bresaola. Pig tenderloin sirloin, porchetta meatball boudin chicken leberkas. Kevin meatloaf turducken fatback sirloin, t-bone shoulder pig swine jerky ribeye ball tip brisket. Ball tip pork loin short ribs sausage tenderloin.</p>
+      <div class="container">
 
-          <p>Cow tri-tip tongue, buffalo t-bone spare ribs pancetta chuck brisket flank burgdoggen salami drumstick. Jowl pork t-bone kevin ribeye picanha flank pork loin ham brisket alcatra prosciutto meatball. Swine strip steak buffalo sirloin. Jowl biltong salami strip steak swine doner pork belly spare ribs tri-tip ball tip. Pastrami bresaola short loin chicken salami, frankfurter biltong corned beef jerky sausage cupim. Pork chop leberkas picanha burgdoggen beef landjaeger pancetta biltong.</p>
+        <div class="row row-centered">
+          <div class="col-md-3"></div>
+          <div class="col-lg-6 col-centered prose">
+            <p>Bacon ipsum dolor amet drumstick boudin ham hock frankfurter, turkey picanha pork loin kielbasa andouille corned beef tri-tip capicola spare ribs short loin. Tail pancetta sirloin, picanha fatback shoulder pastrami t-bone ham bresaola. Pig tenderloin sirloin, porchetta meatball boudin chicken leberkas. Kevin meatloaf turducken fatback sirloin, t-bone shoulder pig swine jerky ribeye ball tip brisket. Ball tip pork loin short ribs sausage tenderloin.</p>
+
+            <p>Cow tri-tip tongue, buffalo t-bone spare ribs pancetta chuck brisket flank burgdoggen salami drumstick. Jowl pork t-bone kevin ribeye picanha flank pork loin ham brisket alcatra prosciutto meatball. Swine strip steak buffalo sirloin. Jowl biltong salami strip steak swine doner pork belly spare ribs tri-tip ball tip. Pastrami bresaola short loin chicken salami, frankfurter biltong corned beef jerky sausage cupim. Pork chop leberkas picanha burgdoggen beef landjaeger pancetta biltong.</p>
+          </div>
+
+          <div class="col-sm-12 col-centered">
+              <img src="photos/placeholder-2.jpg" class="img-fluid" alt="Responsive image">
+          </div>
         </div>
 
-        <div class="col-sm-12 col-centered">
-            <img src="photos/placeholder-2.jpg" class="img-fluid" alt="Responsive image">
-        </div>
       </div>
 
-    </div>
+    
 
           <!-- THIRD ANIMATED SCROLLY SECTION FOR HARBOR TOUR -->
     <div id="container-wide" class="container">
@@ -264,9 +278,13 @@
    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="https://unpkg.com/d3@5.4.0/dist/d3.min.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://unpkg.com/enter-view@1.0.0/enter-view.min.js"></script>
     <script src="https://unpkg.com/stickyfilljs@2.0.5/dist/stickyfill.js"></script>
+    <script src="lib/d3v4/d3.min.js"></script>
+    <script src="lib/d3-selection-multi.min.js"></script>
+    <!-- // <script src="lib/jquery-3.2.1.min.js"></script> -->
+    <script src="lib/scrollama.min.js"></script>
     <script src="scroll.js" type="text/javascript"></script>
   </body>
 

@@ -37,77 +37,98 @@ body {
 	font-size: 14px;
 }
 
-.scrolly-bars {
-	margin: 3rem auto;
-	background-color: #f4f4f4;
-	padding: 1rem;
-
+#scroll {
+  max-width: 60rem;
+  margin: 3rem auto;
+  background-color: solid red;
+  padding: 1rem;
 }
 
-.filler {
-	height: 20rem;
-	text-align: center;
+.scroll__graphic {
+  position: -webkit-sticky;
+  position: sticky;
+  width: 100%;
+  height: 50vh;
+  margin: 0;
+  top: 25vh;
+  left: 0;
 }
 
-#scrolly-overlay .scrolly-bars article {
-	padding: 0;
-	max-width: 30rem;
-	margin: 0 auto;
-	position: relative;
+.scroll__graphic.is-fixed {
+  position: -webkit-sticky;
+  position: sticky;
+  width: 100%;
+  height: 50vh;
+  margin: 0;
+  top: 25vh;
+  left: 0;
 }
 
-#scrolly-overlay .scrolly-bars article .step {
+.scroll__graphic.is-bottom {
+  bottom: 0;
+  top: auto;
+}
+
+.scroll__graphic #chart {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  margin: auto;
+  justify-content: center;
+  -moz-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.scroll__text {
+  padding: 0 1rem;
+  max-width: 30rem;
+  margin: auto;
+}
+
+.step {
   min-height: 67vh;
   margin-bottom: 1rem;
+  opacity: 1;
 }
 
-#scrolly-overlay .scrolly-bars article .step:last-of-type {
-  margin-bottom: 0;
-}
-
-#scrolly-overlay .scrolly-bars article .step.is-active p {
-  background-color: #008080;
-}
-
-#scrolly-overlay .scrolly-bars article .step p {
+.step p {
   margin: 0;
   padding: 1rem;
   text-align: center;
   font-weight: 400;
-  background-color: #5b5b5b;
+  background-color: #E8E8E8;
+  opacity:0.25;
   transition: background-color 250ms ease-in-out;
-  color: #f4f4f4;
 }
 
-#scrolly-overlay .scrolly-bars figure.sticky {
-  position: -webkit-sticky;
-  position: sticky;
-  width: 100%;
-  height: 70vh;
-  background: #f4f4f4;
-  /*opacity: 1;*/
-  margin: 0;
-  top: 15vh;
-  left: 0;
+.is-active p {
+  background-color: #E8E8E8;
+  opacity:1;
 }
 
-/*#scrolly-overlay .scrolly-bars figure.sticky .bar-outer {
-  position: absolute;
-  top: 50%;
-  left: 5%;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
-  width: 90%;
-  height: 4rem;
-  background-color: #fff;
+.em { 
+    font-size: 110%;
+    font-weight: 700;
+    color: #00bcf1;
 }
 
-#scrolly-overlay .scrolly-bars figure.sticky .bar-inner {
-  width: 10%;
-  height: 100%;
-  transition: width 1s ease-in-out;
-  background-color: #daa520;
-}*/
+.barLabels, .barNumbers { 
+    font-size: 80%; 
+    fill: black;
+}
+
+.barNumbers { 
+    fill: black;
+}
+
+.grade14group circle {
+  fill: #B2D235;
+}
+
+text.barNumbers {
+  font-size: 200%;
+}
 
 #container-wide {
   max-width: 90%;
@@ -138,6 +159,44 @@ body {
   margin: 0;
   top: 1.5rem;
   left: 0;
+}
+
+.map2-col {
+  height: 90vh;
+}
+
+#map2 {
+  /*border: solid red;*/
+  top: 0;
+  padding-top: 1.5rem;
+  position: -webkit-sticky;
+  position: sticky;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  left: 0;
+}
+
+#map2-scroll-narrative {
+  padding: 0 1rem;
+  max-width: 30rem;
+  margin: auto;
+}
+
+#map2-scroll-narrative .map2-step {
+  min-height: 33vh;
+  margin-bottom: 1rem;
+  opacity: 1;
+}
+
+#map2-scroll-narrative .map2-step p {
+  margin: 0;
+  padding: 1rem;
+  text-align: center;
+  font-weight: 400;
+  background-color: #E8E8E8;
+  opacity:0.25;
+  transition: background-color 250ms ease-in-out;
 }
 
 .mapboxgl-canvas {
