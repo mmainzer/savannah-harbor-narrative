@@ -161,42 +161,50 @@ text.barNumbers {
   left: 0;
 }
 
-.map2-col {
-  height: 90vh;
+#scrolly-overlay .scrolly {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 1rem;
 }
-
-#map2 {
-  /*border: solid red;*/
-  top: 0;
-  padding-top: 1.5rem;
-  position: -webkit-sticky;
-  position: sticky;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  left: 0;
-}
-
-#map2-scroll-narrative {
-  padding: 0 1rem;
+#scrolly-overlay .scrolly article {
+  padding: 0;
   max-width: 30rem;
-  margin: auto;
+  margin: 0 auto;
+  position: relative;
 }
-
-#map2-scroll-narrative .map2-step {
-  min-height: 33vh;
+#scrolly-overlay .scrolly article .step {
+  min-height: 67vh;
   margin-bottom: 1rem;
-  opacity: 1;
 }
-
-#map2-scroll-narrative .map2-step p {
+#scrolly-overlay .scrolly article .step:last-of-type {
+  margin-bottom: 0;
+}
+#scrolly-overlay .scrolly article .step.is-active p {
+  background-color: #008080;
+}
+#scrolly-overlay .scrolly article .step p {
   margin: 0;
   padding: 1rem;
   text-align: center;
   font-weight: 400;
-  background-color: #E8E8E8;
-  opacity:0.25;
+  background-color: #5b5b5b;
   transition: background-color 250ms ease-in-out;
+  color: #f4f4f4;
+}
+#scrolly-overlay .scrolly figure.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  width: 100%;
+  height: 90vh;
+  margin: 0;
+  top: 5vh;
+  left: 0;
+}
+
+#map2 {
+  position: absolute;
+  height: 100%;
+  width: 100%;
 }
 
 .mapboxgl-canvas {

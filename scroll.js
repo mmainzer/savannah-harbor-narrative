@@ -548,6 +548,8 @@ function slide_six() {
 init();
 
 
+                    // MAPBOX STUFF STARTING NOW
+
 mapboxgl.accessToken = 'pk.eyJ1IjoibW1haW56ZXIiLCJhIjoiY2l5ZDhjZnRyMDB0cDJ3cWtzdWt3azNlcyJ9.EiBO7S8zLzdYg2lnVxwQVg';
 
 
@@ -557,13 +559,29 @@ var map2 = new mapboxgl.Map({
     container: 'map2',
     style: 'mapbox://styles/mmainzer/cjt7bvv5z6byh1fl2b8cfhtyy',
     center: [-1.502249, 25.057790],
-    zoom: 1.5
+    zoom: 1.5,
+    scrollZoom: false,
+    doubleClickZoom: false
 });
 
 map2.on('load', function() {
         map2.resize();
         if (window.location.search.indexOf('embed') !== -1) map2.scrollZoom.disable();
+
+        // add foreign ports dataset
+        map.addSource('foreign-ports', {
+            type: 'vector',
+            url: 'mapbox://mmainzer.cjt7ykc8m02q7kqleoi5okknj'
+        });
+
+        // add stadersand shipping path
+        map.addSource('stadersand-path', {
+            type: 'vector',
+            url: 'mapbox://mmainzer.cjsqfcghj0dgr2rrvg3gy22q9'
+        });
     });
+
+
 
 
 					// INITIATE MAP AND NECESSARY LAYERS
