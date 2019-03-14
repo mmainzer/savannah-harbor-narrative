@@ -587,8 +587,15 @@ map2.on('load', function() {
             },
             "source-layer": "ports-containers",
             "paint": {
-                "circle-radius": {
-                    'base': 1.75
+                "circle-radius": [
+                    "interpolate", ["linear"], ["zoom"],
+                    1.7, ['/', ["to-number", ["get", "Radius"]], 100000],
+                    2.5, ["to-number", ["get", "2014_Containers"]],
+                    3.5, ["to-number", ["get", "2018_Containers"]],
+                    4.5, ["to-number", ["get", "Containers_2014-2018"]]
+            ],
+                'circle-opacity': {
+                    stops: [[1.5, 0], [1.51, 0.3]]
                 },
                 'circle-color': 'rgb(0,188,241)'
             }
@@ -600,27 +607,27 @@ map2.on('load', function() {
 var chapters = {
     '0': {
         center: [-1.502249, 25.057790],
-        zoom: 1.5
+        zoom: 1.49
     },
     '1': {
         center: [-1.502249, 25.057790],
-        zoom: 1.51
+        zoom: 1.5
     },
     '2': {
         center: [-1.502249, 25.057790],
-        zoom: 1.52
+        zoom: 1.51
     },
     '3': {
         center: [-1.502249, 25.057790],
-        zoom: 1.53
+        zoom: 1.52
     },
     '4': {
         center: [-1.502249, 25.057790],
-        zoom: 1.5
+        zoom: 1.53
     },
     '5': {
         center: [-1.502249, 25.057790],
-        zoom: 1.5
+        zoom: 6.5
     }
 };
  
