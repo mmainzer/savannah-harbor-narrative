@@ -568,23 +568,93 @@ map2.on('load', function() {
         map2.resize();
         if (window.location.search.indexOf('embed') !== -1) map2.scrollZoom.disable();
 
-        // add foreign ports dataset
-        map.addSource('foreign-ports', {
+        // add foreign ports tileset for interactive styling later on
+        map2.addSource('foreign-ports', {
             type: 'vector',
-            url: 'mapbox://mmainzer.cjt7ykc8m02q7kqleoi5okknj'
+            url: 'mapbox://mmainzer.cjt7ykc8m02q7kqleoi5okknj-3deft'
         });
 
-        // add stadersand shipping path
-        map.addSource('stadersand-path', {
-            type: 'vector',
-            url: 'mapbox://mmainzer.cjsqfcghj0dgr2rrvg3gy22q9'
+        // add stadersand shipping path dataset
+        var stadersandPathID = "cjsqfcghj0dgr2rrvg3gy22q9";
+        var stadersandPathURL = "https://api.mapbox.com/datasets/v1/mmainzer/" + stadersandPathID + "/features?access_token=" + mapboxgl.accessToken;
+
+        map2.addLayer({
+            "id": "ports",
+            "type": "circle",
+            "source": {
+                type: 'vector',
+                url: 'mapbox://mmainzer.cjt7ykc8m02q7kqleoi5okknj-3deft'
+            },
+            "source-layer": "ports-containers",
+            "paint": {
+                "circle-radius": {
+                    'base': 1.75
+                },
+                'circle-color': 'rgb(0,188,241)'
+            }
         });
+
     });
 
 
+var chapters = {
+    '0': {
+        center: [-1.502249, 25.057790],
+        zoom: 1.5
+    },
+    '1': {
+        center: [-1.502249, 25.057790],
+        zoom: 1.51
+    },
+    '2': {
+        center: [-1.502249, 25.057790],
+        zoom: 1.52
+    },
+    '3': {
+        center: [-1.502249, 25.057790],
+        zoom: 1.53
+    },
+    '4': {
+        center: [-1.502249, 25.057790],
+        zoom: 1.5
+    },
+    '5': {
+        center: [-1.502249, 25.057790],
+        zoom: 1.5
+    }
+};
+ 
+window.addEventListener('scroll', tour_one);
+window.addEventListener('scroll', tour_two);
+
+// On every scroll event, check which element is on screen
+function tour_one() {
+    var chapterNames = Object.keys(chapters);
+    console.log(chapterName)
+    for (var i = 0; i < chapterNames.length; i++) {
+        var chapterName = chapterNames[i];
+            if (isElementOnScreen(chapterName)) {
+            setActiveChapter(chapterName);
+            break;
+        }
+    }
+}
+ 
+var activeChapterName = '0';
+function setActiveChapter(chapterName) {
+    if (chapterName === activeChapterName) return;
+     
+    map2.flyTo(chapters[chapterName]);
+     
+    document.getElementById(chapterName).setAttribute('class', 'step active');
+    document.getElementById(activeChapterName).setAttribute('class', 'step');
+     
+    activeChapterName = chapterName;
+}
+ 
 
 
-					// INITIATE MAP AND NECESSARY LAYERS
+					// INITIATE SECOND MAP AND NECESSARY LAYERS
 
 var currentTourStop = null;
 	
@@ -772,7 +842,7 @@ var tourStops = {
 
                     // ON EVERY SCROLL EVENT, CHECK WHICH ELEMENT IS ON SCREEN
 
-window.onscroll = function() {
+function tour_two() {
     var tourStopNames = Object.keys(tourStops);
     for (var i = 0; i < tourStopNames.length; i++) {
         var tourStopName = tourStopNames[i];
@@ -781,7 +851,7 @@ window.onscroll = function() {
             break;
         }
     }
-};
+}
 
 var activeTourStopName = 'map-step-one';
 function setActiveTourStop(tourStopName) {
