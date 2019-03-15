@@ -558,8 +558,8 @@ mapboxgl.accessToken = 'pk.eyJ1IjoibW1haW56ZXIiLCJhIjoiY2l5ZDhjZnRyMDB0cDJ3cWtzd
 var map2 = new mapboxgl.Map({
     container: 'map2',
     style: 'mapbox://styles/mmainzer/cjt7bvv5z6byh1fl2b8cfhtyy',
-    center: [-1.502249, 25.057790],
-    zoom: 1.5,
+    center: [3.5, 25.057790],
+    zoom: 1.27,
     scrollZoom: false,
     doubleClickZoom: false
 });
@@ -576,7 +576,7 @@ map2.on('load', function() {
 
         // add stadersand shipping path dataset
         var stadersandPathID = "cjsqfcghj0dgr2rrvg3gy22q9";
-        var stadersandPathURL = "https://api.mapbox.com/datasets/v1/mmainzer/" + stadersandPathID + "/features?access_token=" + mapboxgl.accessToken;
+        var stadersandPath = "https://api.mapbox.com/datasets/v1/mmainzer/" + stadersandPathID + "/features?access_token=" + mapboxgl.accessToken;
 
         map2.addLayer({
             "id": "ports",
@@ -586,25 +586,101 @@ map2.on('load', function() {
                 url: 'mapbox://mmainzer.cjt7ykc8m02q7kqleoi5okknj-3deft'
             },
             "source-layer": "ports-containers",
+            "layout": {
+                'visibility': 'none'
+            },
+            "paint": {
+                "circle-radius": 3,
+                // 'circle-opacity': {
+                //     stops: [[1.5, 1], [2.1, 0]]
+                // },
+                'circle-color': 'rgb(0,188,241)'
+            }
+        });
+
+        map2.addLayer({
+            "id": "ports-14",
+            "type": "circle",
+            "source": {
+                type: 'vector',
+                url: 'mapbox://mmainzer.cjt7ykc8m02q7kqleoi5okknj-3deft'
+            },
+            "source-layer": "ports-containers",
+            "layout": {
+                'visibility': 'none'
+            },
             "paint": {
                 "circle-radius": [
-                  "step",
-                  ["zoom"],
-                  3,
-                  1.51,
+                  "interpolate",
+                  ["linear"],
+                  ["get", "2014_Containers"],
+                  0,3,
+                  42363,50
+                ],
+                'circle-opacity': 0.7,
+                'circle-color': 'rgb(0,188,241)'
+            }
+        });
+
+        map2.addLayer({
+            "id": "ports-18",
+            "type": "circle",
+            "source": {
+                type: 'vector',
+                url: 'mapbox://mmainzer.cjt7ykc8m02q7kqleoi5okknj-3deft'
+            },
+            "source-layer": "ports-containers",
+            "layout": {
+                'visibility': 'none'
+            },
+            "paint": {
+                "circle-radius": [
+                  "interpolate",
+                  ["linear"],
+                  ["get", "2018_Containers"],
+                  0,3,
+                  48509,50
+                ],
+                'circle-opacity': 0.7,
+                'circle-color': [
+                  "match",
+                  ["get", "Country"],
                   [
-                    "interpolate",
-                    ["linear"],
-                    [
-                      "get",
-                      "2014_Containers"
-                    ],
-                    0,
-                    2,
-                    42363,
-                    60
+                    "China (Taiwan)",
+                    "Philippines",
+                    "Cambodia",
+                    "Singapore",
+                    "China (Mainland)",
+                    "Japan",
+                    "Thailand",
+                    "South Korea",
+                    "Vietnam",
+                    "Malaysia",
+                    "Hong Kong"
                   ],
-                  1.52,
+                  "hsla(193, 100%, 47%, 0.7)",
+                  "hsla(0, 0%, 30%, 0.7)"
+                ]
+            }
+        });
+
+        map2.addLayer({
+            "id": "ports-euro",
+            "type": "circle",
+            "source": {
+                type: 'vector',
+                url: 'mapbox://mmainzer.cjt7ykc8m02q7kqleoi5okknj-3deft'
+            },
+            "source-layer": "ports-containers",
+            "layout": {
+                'visibility': 'none'
+            },
+            "paint": {
+                "circle-radius": [
+                  "interpolate",
+                  ["linear"],
+                  ["zoom"],
+                  0,
                   [
                     "interpolate",
                     ["linear"],
@@ -613,28 +689,61 @@ map2.on('load', function() {
                       "2018_Containers"
                     ],
                     0,
-                    2,
-                    48509,
-                    60
+                    3,
+                    24255,
+                    5
                   ],
-                  1.53,
+                  3.75,
                   [
                     "interpolate",
                     ["linear"],
                     [
                       "get",
-                      "Containers_2014-2018"
+                      "2018_Containers"
                     ],
                     0,
-                    2,
-                    153940,
-                    60
+                    5,
+                    26949,
+                    80
+                  ],
+                  22,
+                  [
+                    "interpolate",
+                    ["linear"],
+                    [
+                      "get",
+                      "2018_Containers"
+                    ],
+                    0,
+                    3,
+                    24255,
+                    5
                   ]
                 ],
-                // 'circle-opacity': {
-                //     stops: [[1.5, 0], [1.51, 0.3]]
-                // },
-                'circle-color': 'rgb(0,188,241)'
+                'circle-opacity': 0.7,
+                'circle-color': [
+                  "match",
+                  ["get", "Country"],
+                  [
+                    "Italy",
+                    "Slovenia",
+                    "Belgium",
+                    "Malta",
+                    "Ireland",
+                    "Spain",
+                    "Federal Republic of Germany",
+                    "United Kingdom",
+                    "Greece",
+                    "Netherlands",
+                    "Netherland Antilles",
+                    "Denmark",
+                    "France",
+                    "Albania",
+                    "Portugal"
+                  ],
+                  "hsla(193, 100%, 47%, 0.7)",
+                  "hsla(0, 0%, 30%, 0.7)"
+                ]
             }
         });
 
@@ -643,28 +752,36 @@ map2.on('load', function() {
 
 var chapters = {
     '0': {
-        center: [-1.502249, 25.057790],
-        zoom: 1.5
+        center: [3.5, 25.057790],
+        zoom: 1.27,
+
     },
     '1': {
-        center: [-1.502249, 25.057790],
-        zoom: 1.51
+        center: [3.5, 25.057790],
+        zoom: 1.27
     },
     '2': {
-        center: [-1.502249, 25.057790],
-        zoom: 1.52
+        center: [3.5, 25.057790],
+        zoom: 1.27
     },
     '3': {
-        center: [-1.502249, 25.057790],
-        zoom: 1.53
+        center: [3.5, 25.057790],
+        zoom: 1.27
     },
     '4': {
-        center: [-1.502249, 25.057790],
-        zoom: 0
+        center: [3.498127, 47.200043],
+        zoom: 3.9,
+        speed: 0.5
     },
     '5': {
-        center: [-1.502249, 25.057790],
-        zoom: 0
+        center: [9.528939, 53.610899],
+        zoom: 11.41,
+        speed: 0.6
+    },
+    '6': {
+        center: [9.528939, 53.610899],
+        zoom: 11.41,
+        speed: 0.6
     }
 };
  
@@ -674,7 +791,7 @@ window.addEventListener('scroll', tour_two);
 // On every scroll event, check which element is on screen
 function tour_one() {
     var chapterNames = Object.keys(chapters);
-    console.log(chapterName)
+    
     for (var i = 0; i < chapterNames.length; i++) {
         var chapterName = chapterNames[i];
             if (isElementOnScreen(chapterName)) {
@@ -684,18 +801,58 @@ function tour_one() {
     }
 }
  
-var activeChapterName = '';
+var activeChapterName = '0';
 function setActiveChapter(chapterName) {
     if (chapterName === activeChapterName) return;
      
-    map2.flyTo(chapters[chapterName]);
+    if (chapterName !== '6') {
+        map2.flyTo(chapters[chapterName]);
+    } else {
+
+    };
+
      
-    document.getElementById(chapterName).setAttribute('class', 'step active');
+    document.getElementById(chapterName).setAttribute('class', 'step is-active');
     document.getElementById(activeChapterName).setAttribute('class', 'step');
-     
+    console.log(chapterName, activeChapterName);
+    
+    if (chapterName === '0') {
+        map2.setLayoutProperty('ports', 'visibility', 'none')
+        map2.setLayoutProperty('ports-14', 'visibility', 'none')
+        map2.setLayoutProperty('ports-18', 'visibility', 'none')
+        map2.setLayoutProperty('ports-euro', 'visibility', 'none')
+    } else if (chapterName === '1') {
+        map2.setLayoutProperty('ports', 'visibility', 'visible')
+        map2.setLayoutProperty('ports-14', 'visibility', 'none')
+        map2.setLayoutProperty('ports-18', 'visibility', 'none')
+        map2.setLayoutProperty('ports-euro', 'visibility', 'none')
+    } else if (chapterName === '2') {
+        map2.setLayoutProperty('ports', 'visibility', 'none')
+        map2.setLayoutProperty('ports-14', 'visibility', 'visible')
+        map2.setLayoutProperty('ports-18', 'visibility', 'none')
+        map2.setLayoutProperty('ports-euro', 'visibility', 'none')
+    } else if (chapterName === '3') {
+        map2.setLayoutProperty('ports', 'visibility', 'none')
+        map2.setLayoutProperty('ports-14', 'visibility', 'none')
+        map2.setLayoutProperty('ports-18', 'visibility', 'visible')
+        map2.setLayoutProperty('ports-euro', 'visibility', 'none')
+    } else if (chapterName === '4' || chapterName === '5') {
+        map2.setLayoutProperty('ports', 'visibility', 'none')
+        map2.setLayoutProperty('ports-14', 'visibility', 'none')
+        map2.setLayoutProperty('ports-18', 'visibility', 'none')
+        map2.setLayoutProperty('ports-euro', 'visibility', 'visible')
+    } else {
+        map2.setLayoutProperty('ports', 'visibility', 'none')
+        map2.setLayoutProperty('ports-14', 'visibility', 'none')
+        map2.setLayoutProperty('ports-18', 'visibility', 'none')
+        map2.setLayoutProperty('ports-euro', 'visibility', 'none')
+        map2.flyTo
+    };
+
     activeChapterName = chapterName;
+
+
 }
- 
 
 
 					// INITIATE SECOND MAP AND NECESSARY LAYERS
@@ -928,5 +1085,5 @@ function setActiveTourStop(tourStopName) {
 function isElementOnScreen(id) {
     var element = document.getElementById(id);
     var bounds = element.getBoundingClientRect();
-    return bounds.top < window.innerHeight && bounds.bottom > 0;
+    return bounds.top < window.innerHeight && bounds.bottom > 300;
 }
