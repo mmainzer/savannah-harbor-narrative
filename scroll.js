@@ -588,15 +588,52 @@ map2.on('load', function() {
             "source-layer": "ports-containers",
             "paint": {
                 "circle-radius": [
-                    "interpolate", ["linear"], ["zoom"],
-                    1.7, ['/', ["to-number", ["get", "Radius"]], 100000],
-                    2.5, ["to-number", ["get", "2014_Containers"]],
-                    3.5, ["to-number", ["get", "2018_Containers"]],
-                    4.5, ["to-number", ["get", "Containers_2014-2018"]]
-            ],
-                'circle-opacity': {
-                    stops: [[1.5, 0], [1.51, 0.3]]
-                },
+                  "step",
+                  ["zoom"],
+                  3,
+                  1.51,
+                  [
+                    "interpolate",
+                    ["linear"],
+                    [
+                      "get",
+                      "2014_Containers"
+                    ],
+                    0,
+                    2,
+                    42363,
+                    60
+                  ],
+                  1.52,
+                  [
+                    "interpolate",
+                    ["linear"],
+                    [
+                      "get",
+                      "2018_Containers"
+                    ],
+                    0,
+                    2,
+                    48509,
+                    60
+                  ],
+                  1.53,
+                  [
+                    "interpolate",
+                    ["linear"],
+                    [
+                      "get",
+                      "Containers_2014-2018"
+                    ],
+                    0,
+                    2,
+                    153940,
+                    60
+                  ]
+                ],
+                // 'circle-opacity': {
+                //     stops: [[1.5, 0], [1.51, 0.3]]
+                // },
                 'circle-color': 'rgb(0,188,241)'
             }
         });
@@ -607,27 +644,27 @@ map2.on('load', function() {
 var chapters = {
     '0': {
         center: [-1.502249, 25.057790],
-        zoom: 1.49
+        zoom: 1.5
     },
     '1': {
         center: [-1.502249, 25.057790],
-        zoom: 1.5
+        zoom: 1.51
     },
     '2': {
         center: [-1.502249, 25.057790],
-        zoom: 1.51
+        zoom: 1.52
     },
     '3': {
         center: [-1.502249, 25.057790],
-        zoom: 1.52
+        zoom: 1.53
     },
     '4': {
         center: [-1.502249, 25.057790],
-        zoom: 1.53
+        zoom: 0
     },
     '5': {
         center: [-1.502249, 25.057790],
-        zoom: 6.5
+        zoom: 0
     }
 };
  
@@ -647,7 +684,7 @@ function tour_one() {
     }
 }
  
-var activeChapterName = '0';
+var activeChapterName = '';
 function setActiveChapter(chapterName) {
     if (chapterName === activeChapterName) return;
      
