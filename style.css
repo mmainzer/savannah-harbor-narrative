@@ -92,6 +92,10 @@ body {
   opacity: 1;
 }
 
+.step:last-of-type {
+  padding-bottom: 60rem;
+}
+
 .step p {
   margin: 0;
   padding: 1rem;
@@ -191,6 +195,12 @@ text.barNumbers {
 }
 
 #map2 {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+#map3 {
   position: absolute;
   height: 100%;
   width: 100%;

@@ -561,7 +561,8 @@ var map2 = new mapboxgl.Map({
     center: [3.5, 25.057790],
     zoom: 1.27,
     scrollZoom: false,
-    doubleClickZoom: false
+    doubleClickZoom: false,
+    renderWorldCopies: false
 });
 
 map2.on('load', function() {
@@ -573,10 +574,6 @@ map2.on('load', function() {
             type: 'vector',
             url: 'mapbox://mmainzer.cjt7ykc8m02q7kqleoi5okknj-3deft'
         });
-
-        // add stadersand shipping path dataset
-        var stadersandPathID = "cjsqfcghj0dgr2rrvg3gy22q9";
-        var stadersandPath = "https://api.mapbox.com/datasets/v1/mmainzer/" + stadersandPathID + "/features?access_token=" + mapboxgl.accessToken;
 
         map2.addLayer({
             "id": "ports",
@@ -754,7 +751,6 @@ var chapters = {
     '0': {
         center: [3.5, 25.057790],
         zoom: 1.27,
-
     },
     '1': {
         center: [3.5, 25.057790],
@@ -784,14 +780,83 @@ var chapters = {
         speed: 0.6
     }
 };
+
+                    // INITIATE THIRD MAP FOR ROUTE TO KIA MANUFACTURING PLANT
+
+var map3 = new mapboxgl.Map({
+    container: 'map3',
+    style: 'mapbox://styles/mmainzer/cjt7bvv5z6byh1fl2b8cfhtyy',
+    center: [-81.123, 32.076],
+    zoom: 11.41,
+    scrollZoom: false,
+    doubleClickZoom: false,
+    dragRotate: false
+});
+
+                    // ADD LAYERS YOU'LL SHOW AND HIDE LATER ON
+
+map3.on('load', function() {
+        map3.resize();
+        if (window.location.search.indexOf('embed') !== -1) map2.scrollZoom.disable();
+
+        // add foreign ports tileset for interactive styling later on
+        map3.addSource('savannah-terminals', {
+            type: 'vector',
+            url: 'mapbox://mmainzer.cjmw5zy2g0bt22qo329wc9c2o-9mofv'
+        });
+
+        map3.addLayer({
+            "id": "jasper-boundary",
+            "type": "fill",
+            "source": "savannah-terminals",
+            'source-layer': 'savannah-terminals',
+            "paint": {
+                "fill-color": "#f26322",
+                "fill-opacity": 0.4
+            },
+            "filter": ["==", "$type", "Polygon"]
+        });
+
+
+
+    });
+
+
+var routeSteps = {
+    'kia0': {
+        center: [-81.123, 32.076],
+        zoom: 11.41
+    },
+    'kia1': {
+        center: [-81.123, 32.076],
+        zoom: 11.41
+    },
+    'kia2': {
+        center: [-81.123, 32.076],
+        zoom: 11.41
+    },
+    'kia3': {
+        center: [-81.123, 32.076],
+        zoom: 11.41
+    },
+
+    'kia4': {
+        center: [-85.119433,32.925241],
+        zoom: 13,
+        // speed: 0.22,
+        duration: 20100,
+        minZoom: 6,
+        easing(t) {return t;}
+    }
+};
  
 window.addEventListener('scroll', tour_one);
 window.addEventListener('scroll', tour_two);
+window.addEventListener('scroll', tour_three);
 
 // On every scroll event, check which element is on screen
 function tour_one() {
-    var chapterNames = Object.keys(chapters);
-    
+    var chapterNames = Object.keys(chapters);    
     for (var i = 0; i < chapterNames.length; i++) {
         var chapterName = chapterNames[i];
             if (isElementOnScreen(chapterName)) {
@@ -805,13 +870,12 @@ var activeChapterName = '0';
 function setActiveChapter(chapterName) {
     if (chapterName === activeChapterName) return;
      
-    if (chapterName !== '6') {
-        map2.flyTo(chapters[chapterName]);
-    } else {
+    map2.flyTo(chapters[chapterName]);
 
-    };
-
-     
+    // add stadersand shipping path dataset
+        var stadersandPathID = "cjsqfcghj0dgr2rrvg3gy22q9";
+        var stadersandPath = "https://api.mapbox.com/datasets/v1/mmainzer/" + stadersandPathID + "/features?access_token=" + mapboxgl.accessToken;
+           
     document.getElementById(chapterName).setAttribute('class', 'step is-active');
     document.getElementById(activeChapterName).setAttribute('class', 'step');
     console.log(chapterName, activeChapterName);
@@ -821,35 +885,171 @@ function setActiveChapter(chapterName) {
         map2.setLayoutProperty('ports-14', 'visibility', 'none')
         map2.setLayoutProperty('ports-18', 'visibility', 'none')
         map2.setLayoutProperty('ports-euro', 'visibility', 'none')
+        map2.setLayoutProperty('trace', 'visibility', 'none')
     } else if (chapterName === '1') {
         map2.setLayoutProperty('ports', 'visibility', 'visible')
         map2.setLayoutProperty('ports-14', 'visibility', 'none')
         map2.setLayoutProperty('ports-18', 'visibility', 'none')
         map2.setLayoutProperty('ports-euro', 'visibility', 'none')
+        map2.setLayoutProperty('trace', 'visibility', 'none')
     } else if (chapterName === '2') {
         map2.setLayoutProperty('ports', 'visibility', 'none')
         map2.setLayoutProperty('ports-14', 'visibility', 'visible')
         map2.setLayoutProperty('ports-18', 'visibility', 'none')
         map2.setLayoutProperty('ports-euro', 'visibility', 'none')
+        map2.setLayoutProperty('trace', 'visibility', 'none')
     } else if (chapterName === '3') {
         map2.setLayoutProperty('ports', 'visibility', 'none')
         map2.setLayoutProperty('ports-14', 'visibility', 'none')
         map2.setLayoutProperty('ports-18', 'visibility', 'visible')
         map2.setLayoutProperty('ports-euro', 'visibility', 'none')
+        map2.setLayoutProperty('trace', 'visibility', 'none')
     } else if (chapterName === '4' || chapterName === '5') {
         map2.setLayoutProperty('ports', 'visibility', 'none')
         map2.setLayoutProperty('ports-14', 'visibility', 'none')
         map2.setLayoutProperty('ports-18', 'visibility', 'none')
         map2.setLayoutProperty('ports-euro', 'visibility', 'visible')
+        map2.setLayoutProperty('trace', 'visibility', 'none')
+    } else if (chapterName === '6') {
+        map2.setLayoutProperty('ports', 'visibility', 'none')
+        map2.setLayoutProperty('ports-14', 'visibility', 'none')
+        map2.setLayoutProperty('ports-18', 'visibility', 'none')
+        map2.setLayoutProperty('ports-euro', 'visibility', 'none')
+
+        d3.json(stadersandPath, function(err, data) {
+            if (err) throw err;
+
+            var coordinates = data.features[0].geometry.coordinates;
+
+            data.features[0].geometry.coordinates = [coordinates[0]];
+
+            map2.addSource('trace', { type: 'geojson', data : data });
+        
+            map2.addLayer({
+                "id": "trace",
+                "type": "line",
+                "source": "trace",
+                "paint": {
+                    "line-color": "yellow",
+                    "line-opacity": 0.75,
+                    "line-width": 5
+                }
+            });
+
+            // setup the viewport
+            // map2.flyTo({ center: coordinates[0], zoom: 5 });
+            // map2.setPitch(0);
+             
+            // on a regular basis, add more coordinates from the saved list and update the map
+            var i = 0;
+            var timer = window.setInterval(function() {
+                if (i < coordinates.length) {
+                    data.features[0].geometry.coordinates.push(coordinates[i]);
+                    map2.getSource('trace').setData(data);
+                    map2.flyTo({center: [-81.025, 32.060], zoom: 11.41, speed: 0.57, easing(t) {return t;}});
+                    // map2.easeTo()
+                    i++;
+                } else {
+                    window.clearInterval(timer);
+                }
+            }, 70);
+
+        });  
+
+
     } else {
         map2.setLayoutProperty('ports', 'visibility', 'none')
         map2.setLayoutProperty('ports-14', 'visibility', 'none')
         map2.setLayoutProperty('ports-18', 'visibility', 'none')
         map2.setLayoutProperty('ports-euro', 'visibility', 'none')
-        map2.flyTo
     };
 
     activeChapterName = chapterName;
+
+
+}
+
+// On every scroll event, check which element is on screen
+function tour_three() {
+    var stepNames = Object.keys(routeSteps);    
+    for (var i = 0; i < stepNames.length; i++) {
+        var stepName = stepNames[i];
+            if (isElementOnScreen(stepName)) {
+            setActiveStep(stepName);
+            break;
+        }
+    }
+}
+ 
+var activeStep = 'kia0';
+function setActiveStep(stepName) {
+    if (stepName === activeStep) return;
+     
+    map3.flyTo(routeSteps[stepName]);
+
+    // add stadersand shipping path dataset
+        var kiaRouteId = "cjwl077un0jz02nlg1ork408d";
+        var kiaRoute = "https://api.mapbox.com/datasets/v1/mmainzer/" + kiaRouteId + "/features?access_token=" + mapboxgl.accessToken;
+           
+    document.getElementById(stepName).setAttribute('class', 'step is-active');
+    document.getElementById(activeStep).setAttribute('class', 'step');
+    console.log(stepName, activeStep);
+    
+    if (stepName === 'kia0') {
+        map3.setLayoutProperty('jasper-boundary', 'visibility', 'visible')
+
+    } else if (stepName === 'kia1') {
+        map3.setLayoutProperty('jasper-boundary', 'visibility', 'none')
+
+    } else if (stepName === 'kia2') {
+        map3.setLayoutProperty('jasper-boundary', 'visibility', 'visible')
+
+    } else if (stepName === 'kia3') {
+        map3.setLayoutProperty('jasper-boundary', 'visibility', 'none')
+
+    } else if (stepName === 'kia4') {
+        map3.setLayoutProperty('jasper-boundary', 'visibility', 'none')
+
+        d3.json(kiaRoute, function(err, data) {
+            if (err) throw err;
+
+            var coordinates = data.features[1].geometry.coordinates;
+
+            data.features[1].geometry.coordinates = [coordinates[0]];
+
+            map3.addSource('kia-route', { type: 'geojson', data : data });
+        
+            map3.addLayer({
+                "id": "kia-route",
+                "type": "line",
+                "source": "kia-route",
+                "paint": {
+                    "line-color": "#007DB9",
+                    "line-opacity": 0.8,
+                    "line-width": 5
+                }
+            });
+             
+            // on a regular basis, add more coordinates from the saved list and update the map
+            var i = 0;
+            var timer = window.setInterval(function() {
+                if (i < coordinates.length) {
+                    data.features[1].geometry.coordinates.push(coordinates[i]);
+                    map3.getSource('kia-route').setData(data);
+                    i++;
+                } else {
+                    window.clearInterval(timer);
+                }
+            }, 4.7);
+
+        });  
+
+
+    } else {
+        map3.setLayoutProperty('jasper-boundary', 'visibility', 'none')
+    };
+
+    activeStep = stepName;
 
 
 }
