@@ -1067,7 +1067,7 @@ var bounds = [
 
 var map = new mapboxgl.Map({
     container: 'map', // container id
-	style: 'mapbox://styles/mmainzer/cjlgxlhqx05kr2smq7ikmghls', // stylesheet location
+	style: 'mapbox://styles/mmainzer/cjt7bvv5z6byh1fl2b8cfhtyy', // stylesheet location
 	center: [-81.044757, 32.086214],
     bearing: 0,
     pitch: 0,
